@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>hermes</title>
+    <link rel="stylesheet" href="styles/bootstrap.min.css" media="screen" charset="utf-8">
+    <link rel="stylesheet" href="kendo/styles/kendo.common.min.css" media="screen" charset="utf-8">
+    <link rel="stylesheet" href="kendo/styles/kendo.rtl.min.css" media="screen" charset="utf-8">
+    <link rel="stylesheet" href="kendo/styles/kendo.bootstrap.min.css" media="screen" charset="utf-8">
+    <link rel="stylesheet" href="kendo/styles/kendo.bootstrap.mobile.min.css" media="screen" charset="utf-8">
+    <link rel="stylesheet" href="scrollbar/styles/jquery.mCustomScrollbar.css" media="screen" title="no title" charset="utf-8">
+
+    <script src="js/jquery.min.js" charset="utf-8"></script>
+    <script src="kendo/js/kendo.all.min.js" charset="utf-8"></script>
+    <script src="layer/layer.js" charset="utf-8"></script>
+
+    <style media="screen">
+      html,body{
+        height:100%;
+      }
+      .test-border{
+        border:1px solid #000;
+      }
+      .top-tip{
+        height:60px;
+        background-color: #438EB9;
+      }
+      .top-tip .top-title{
+        font-size: 30px;
+        line-height: 60px;
+        padding-left: 20px;
+        color: #fff;
+        height:100%;
+        width:200px;
+        float: left;
+        text-transform: uppercase;
+      }
+      .top-tip .top-userinfo{
+        height:100%;
+        float: right;
+      }
+      .top-tip .top-userinfo span{
+        color: #fff;
+        line-height: 60px;
+      }
+      .top-tip .top-userinfo a{
+        color: #fff;
+        line-height: 60px;
+        float: right;
+        padding: 0 20px;
+      }
+      .main-content{
+        height:90%;
+      }
+      .main-content .left-menu{
+        height:100%;
+        width:200px;
+        background-color: #F2F2F2;
+        float: left;
+      }
+      .main-content .left-menu .left-menu-event{
+        margin-top: 15px;
+        height:30px;
+        border-top: 1px solid #E0E0E0;
+        border-bottom: 1px solid #E0E0E0;
+        line-height: 30px;
+        text-align: center;
+      }
+      .main-content .left-menu .left-menu-event:hover{
+        cursor: pointer;
+      }
+      .right-content{
+        height:100%;
+        float: left;
+        overflow-x:auto;
+      }
+      .menu-title{
+        height:40px;
+      }
+      .controll-tai{
+        height: 40px;
+        line-height: 40px;
+        padding-left: 15px;
+        border-left: 1px solid #CCCCCC;
+        border-right: 1px solid #CCCCCC;
+      }
+    </style>
+    <script type="text/javascript">
+      $(function(){
+        $(".left-menu-event").click(function(){
+          hideOrShowMenu();
+        });
+        function hideOrShowMenu(){
+          var flag = $(".left-menu").css("display")==='block';
+          if(flag){
+            //$(".left-menu").css("display","none")
+          }
+        }
+
+        $(window).resize(function(){
+          setContentSize();
+        });
+        function setContentSize(){
+          var window_width = $(window).width();
+          var width = window_width-218;
+          $(".right-content").width(width);
+        }
+        setContentSize();
+
+        $("#maincontent").mCustomScrollbar({
+					scrollButtons:{
+						enable:true
+					},
+					theme:"dark-thick"
+				});
+      });
+    </script>
+  </head>
+  <body>
+    <div class="top-tip">
+      <div class="top-title">
+        hermes
+      </div>
+      <div class="top-userinfo">
+        <span href="javascript(0)">欢迎你：zhangwy_001@126.com</span>
+        <a href="#">退出</a>
+      </div>
+    </div>
+    <div class="main-content">
+      <div class="left-menu">
+        <div class="controll-tai">
+          控制台
+        </div>
+        <div>
+          <ul id="menubar"></ul>
+        </div>
+        <div class="left-menu-event">
+          <<
+        </div>
+      </div>
+      <div class="right-content" id="maincontent">
+
+      </div>
+    </div>
+    <script type="text/javascript">
+      $(function(){
+        $("#menubar").kendoPanelBar({
+            dataSource: [
+              {
+                  text: "订阅",
+                  expanded: false,
+                  cssClass:'menu-1-text',
+                  items: [{
+                      cssClass:"rssregedit",
+                      text: "RSS订阅管理"
+                  }]
+              },
+              {
+                  text: "阅读",
+                  expanded: false,
+                  cssClass:'menu-1-text',
+                  items: [{
+                      cssClass:"rssread",
+                      text: "RSS阅读",
+                  }]
+              }]
+        });
+
+        $(".rssregedit span").click(function(){
+          console.log("rss订阅管理");
+          var loading = layer.load(0, {shade: false});
+          $("#maincontent").load("demo.html",function(e){
+            layer.close(loading);
+          });
+        });
+        $(".rssread span").click(function(){
+          console.log("rss阅读管理");
+          var loading = layer.load(0, {shade: false});
+          //layer.alert("message");
+        });
+
+      });
+    </script>
+    <script src="scrollbar/js/jquery.mousewheel.js" charset="utf-8"></script>
+    <script src="scrollbar/js/jquery.mCustomScrollbar.js" charset="utf-8"></script>
+  </body>
+</html>
