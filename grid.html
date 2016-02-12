@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>grid</title>
+  </head>
+  <body>
+    <div id="grid">
+      <script type="text/x-kendo-template" id="gridtoolbar">
+            <div class="toolbar-box">
+              <input type="text" class="k-textbox" id="category" style="width: 150px"/>
+            </div>
+      </script>
+    </div>
+    <script type="text/javascript">
+      $(function(){
+        $("#grid").kendoGrid({
+                dataSource: {
+                  transport:{
+                    read:{
+                      url:'ajax/grid.json',
+                      dataType:'json'
+                    }
+                  },
+                  pageSize: 20
+                },
+                toolbar: kendo.template($("#gridtoolbar").html()),
+                height: '98%',
+                sortable: true,
+                pageable: {
+                    refresh: true,
+                    pageSizes: true,
+                    buttonCount: 5
+                },
+                columns: [{
+                    field: "name",
+                    title: "姓名",
+                    width: 240
+                }, {
+                    field: "age",
+                    title: "年龄"
+                }, {
+                    field: "location",
+                    title: "详细地址"
+                }, {
+                    field: "country",
+                    title: "国家",
+                    width: 150
+                }]
+            });
+      });
+    </script>
+  </body>
+</html>

@@ -72,6 +72,7 @@
       .right-content{
         height:100%;
         float: left;
+        padding: 10px 0 10px 10px;
         overflow-x:auto;
       }
       .menu-title{
@@ -83,6 +84,9 @@
         padding-left: 15px;
         border-left: 1px solid #CCCCCC;
         border-right: 1px solid #CCCCCC;
+      }
+      .toolbar-box{
+        padding: 10px;
       }
     </style>
     <script type="text/javascript">
@@ -102,7 +106,7 @@
         });
         function setContentSize(){
           var window_width = $(window).width();
-          var width = window_width-218;
+          var width = window_width-228;
           $(".right-content").width(width);
         }
         setContentSize();
@@ -177,6 +181,9 @@
           console.log("rss阅读管理");
           var loading = layer.load(0, {shade: false});
           //layer.alert("message");
+          $("#maincontent").load("grid.html",function(e){
+            layer.close(loading);
+          });
         });
 
       });
